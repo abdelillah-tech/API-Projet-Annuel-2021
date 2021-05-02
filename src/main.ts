@@ -11,40 +11,39 @@ const { PORT, API_VERSION } = process.env
 
 async function bootstrap() {
 
-  const allowedResponseOrigins = [
-    "http://localhost:4200"
-  ]
+    const allowedResponseOrigins = [
+        "http://localhost:3000"
+    ]
 
-  const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create(AppModule);
 
-  // swagger
-  const config = new DocumentBuilder()
-    .setTitle('Projet Annuel API')
-    .setDescription('back nestJs de l\'application')
-    .setVersion(`${API_VERSION}`)
-    .addTag('api')
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+    //prefix  for api URL
+    app.setGlobalPrefix(`api/v${API_VERSION}`);
 
-  // pipe for DTO validation
-  app.useGlobalPipes(new ValidationPipe());
+    // swagger
+    const config = new DocumentBuilder()
+        .setTitle('Projet Annuel API')
+        .setDescription('back nestJs de l\'application')
+        .setVersion(`${API_VERSION}`)
+        .build();
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api', app, document);
 
-  //prefix  for api URL
-  app.setGlobalPrefix(`api/v${API_VERSION}`);
+    // pipe for DTO validation
+    app.useGlobalPipes(new ValidationPipe());
 
-  // cors config
-  app.enableCors({
-    origin: allowedResponseOrigins,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    optionsSuccessStatus: 200,
-    allowedHeaders: '*',
-  })
-  
-  // start app
-  await app.listen(PORT || 3000).then(() => {
-    logger.log(`App started on port ${PORT || 3000}`);
-  });
+    // cors config
+    app.enableCors({
+        origin: allowedResponseOrigins,
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        optionsSuccessStatus: 200,
+        allowedHeaders: '*',
+    })
+
+    // start app
+    await app.listen(PORT || 3000).then(() => {
+        logger.log(`App started on port ${PORT || 3000}`);
+    });
 }
 
 bootstrap();

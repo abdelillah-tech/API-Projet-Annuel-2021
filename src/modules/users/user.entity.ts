@@ -2,15 +2,15 @@ import { BaseEntity, Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGe
 
 @Entity()
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  public id: number;
+    @PrimaryGeneratedColumn()
+    public id: number;
 
-  @Column({ unique: true })
-  public email: string;
+    @Column({ unique: true })
+    public email: string;
 
-  @Column({ unique: true })
-  public name: string;
+    @Column({ unique: true })
+    public name: string;
 
-  @Column()
-  public password: string;
+    @Column()
+    public password: string;
 }

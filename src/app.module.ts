@@ -9,34 +9,34 @@ import { RootModule } from './modules/root/root.module';
 import { User } from './modules/users/user.entity';
 
 const {
-  POSTGRES_HOST,
-  POSTGRES_PORT,
-  POSTGRES_USER,
-  POSTGRES_PASSWORD,
-  POSTGRES_DB,
-  ENV
+    POSTGRES_HOST,
+    POSTGRES_PORT,
+    POSTGRES_USER,
+    POSTGRES_PASSWORD,
+    POSTGRES_DB,
+    ENV
 } = process.env
 
 const POSTGRES_DB_CONFIG: PostgresConnectionOptions = {
-  name: "POSTGRES",
-  type: 'postgres',
-  host: POSTGRES_HOST,
-  port: parseInt(POSTGRES_PORT),
-  username: POSTGRES_USER,
-  password: POSTGRES_PASSWORD,
-  database: POSTGRES_DB,
-  logging: ['error'],
-  entities: [User],
-  synchronize: true
+    name: "POSTGRES",
+    type: 'postgres',
+    host: POSTGRES_HOST,
+    port: parseInt(POSTGRES_PORT),
+    username: POSTGRES_USER,
+    password: POSTGRES_PASSWORD,
+    database: POSTGRES_DB,
+    logging: ['error'],
+    entities: [User],
+    synchronize: true
 };
 @Module({
-  imports: [
-    TypeOrmModule.forRoot(POSTGRES_DB_CONFIG),
-    RootModule,
-    AuthenticationModule,
-    UsersModule,
-  ],
-  controllers: [],
-  providers: [],
+    imports: [
+        TypeOrmModule.forRoot(POSTGRES_DB_CONFIG),
+        RootModule,
+        AuthenticationModule,
+        UsersModule,
+    ],
+    controllers: [],
+    providers: [],
 })
-export class AppModule {}
+export class AppModule { }
